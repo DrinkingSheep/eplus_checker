@@ -11,7 +11,7 @@ namespace checker
     {
         static void Main(string[] args)
         {
-
+            System.Net.ServicePointManager.Expect100Continue = false;
             //사이트:http://north2.eplus.jp/sys/main.jsp?uji.verb=GGWP01_mousikomi&uji.bean=B.apl.web.JOAB070100Bean&uketsukeInfoKubun=001&ZScreenId=GGWA01&_ga=1.177094496.435414153.1483601896
 
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create("http://north2.eplus.jp/sys/main.jsp?uji.verb=GGWP01_mousikomi&uji.bean=B.apl.web.JOAB070100Bean&uketsukeInfoKubun=001&ZScreenId=GGWA01&_ga=1.177094496.435414153.1483601896"); req.Method = "Post";
@@ -25,15 +25,16 @@ namespace checker
             TextWriter w = (TextWriter)new System.IO.StreamWriter(req.GetRequestStream());
 
             
-            w.Write(s); w.Close();
-
-
-
-
+            w.Write(s);
+            w.Close();
+            
 
             HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+
+            Console.WriteLine(resp);
+
             TextReader r = (TextReader)new StreamReader(resp.GetResponseStream());
-            Console.WriteLine(r.ReadToEnd());
+           // Console.WriteLine(r.ReadToEnd());
 
 
        
